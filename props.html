@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <!-- props验证   来验证传入数据是否有效。当向 props 传入无效数据时，JavaScript 控制台会抛出警告 -->
+    <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+</head>
+<body>
+    <div id="aa"></div>
+    <div id="bb"></div>
+    <div id="cc"></div>
+    <script type="text/babel">
+        class Message extends React.Component{
+            render(){
+                return(
+                    <h1>{this.props.name}</h1>
+                );
+            }
+        }
+        Message.defaultProps = {
+            name: 'ann'
+        };
+        const ele = <Message />;
+
+        ReactDOM.render(
+            ele,
+            document.getElementById('aa')
+        )
+
+        // state和props组合
+        class Web extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    name:'anne',
+                    site:'https://www.runoob.com'
+                }
+            }
+            render(){
+                return(
+                    <div>
+                        <Name name={this.state.name} />
+                        <Site site={this.state.site} />
+                    </div>
+                );
+            }
+        }
+
+        class Name extends React.Component{
+            render(){
+                return(
+                    <h1>{this.props.name}</h1>
+                );
+            }
+        }
+        class Site extends React.Component{
+            render(){
+                return(
+                    <h1>{this.props.site}</h1>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Web />,
+            document.getElementById('bb')
+        );
+
+        // props验证
+        var title = "aaa";
+        // var title = 123;
+        class Title extends React.Component{
+            render(){
+                return(
+                    <h1>{this.props.title}</h1>
+                );
+            }
+        }
+        // title必须是字符串，非字符串会自动转化为字符串
+        Title.propTypes = {
+            title: PropTypes.string
+        };
+
+        ReactDOM.render(
+            <Title title={title} />,
+            document.getElementById('cc')
+        )
+    </script>
+</body>
+</html>

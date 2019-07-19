@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+<!-- React 里，只需更新组件的 state，然后根据新的 state 重新渲染用户界面（不要操作 DOM）。 -->
+    <div id="aa"></div>
+    <script type="text/babel">
+        class Clock extends React.Component{
+            // 添加一个类构造函数来初始化状态 this.state
+            constructor(props){
+                super(props);
+                this.state = {date:new Date()};
+            }
+
+            // 添加生命周期
+            // 挂载
+            // 在组件输出到 DOM 后会执行 componentDidMount() 钩子
+            // this.timerID 为定时器的 ID，我们可以在 componentWillUnmount() 钩子中卸载定时器
+            componentDidMount(){
+                this.timeID = setInterval(()=>{this.tick()},1000);
+            }
+            // 卸载
+            componentWillUnmount(){
+                clearInterval(this.timeID);
+            }
+            tick(){
+                // 调用 setState() 来调度UI更新
+                this.setState({
+                    date: new Date()
+                });
+            }
+
+            render(){
+                return(
+                    <div>{this.state.date.toLocaleTimeString()}</div>
+                )
+            };
+        }
+        ReactDOM.render(
+            <Clock />,
+            document.getElementById('aa')
+        )
+    </script>
+</body>
+</html>

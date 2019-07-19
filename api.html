@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+    <!--
+        设置状态：setState
+        替换状态：replaceState
+        设置属性：setProps
+        替换属性：replaceProps
+        强制更新：forceUpdate
+        获取DOM节点：findDOMNode
+        判断组件挂载状态：isMounted
+    -->
+    <div id="aa"></div>
+    <script type="text/babel">
+        class Foo extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {clickCount:0};
+                this.click = this.click.bind(this);
+            }
+            click(){
+                this.setState(function (state) {
+                    return {clickCount:state.clickCount+1};
+                });
+            }
+            render(){
+                return(<div onClick={this.click}>{this.state.clickCount}</div>)
+            }
+        }
+        ReactDOM.render(
+            <Foo />,
+            document.getElementById('aa')
+        );
+    </script>
+</body>
+</html>

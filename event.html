@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+    <div id="aa"></div>
+    <div id="bb"></div>
+    <script type="text/babel">
+        function ActionLink() {
+            function handleClick(e){
+                e.preventDefault();
+                console.log('click it');
+            }
+            return(
+                <a href="#" onClick={handleClick}>
+                    click it
+                </a>
+            )
+        }
+        ReactDOM.render(
+            <ActionLink />,
+            document.getElementById('aa')
+        );
+
+        // 切换按钮
+        class Change extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {isOn: true};
+                // 绑定this，使得this可以在回调函数中使用
+                // 类的方法默认是不会绑定 this 的。
+                // 如果你忘记绑定 this.handleClick 并把它传入 onClick, 
+                // 当你调用这个函数的时候 this 的值会是 undefined。
+                this.click = this.click.bind(this);
+            }
+            click(){
+                this.setState(prevState=>({
+                    isOn: !prevState.isOn
+                }));
+            }
+            // 绑定this
+            // click = () => {}
+            render(){
+                return(
+                    // 绑定this
+                    // <button onClick={(e)=>this.click(e)}>
+                    <button onClick={this.click}>
+                        {this.state.isOn ? 'ON' : 'OFF'}    
+                    </button>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Change />,
+            document.getElementById('bb')
+        )
+        // 向事件处理程序传递参数
+        // 1.参数 e 作为 React 事件对象将会被作为第二个参数进行传递。通过箭头函数的方式，事件对象必须显式的进行传递
+        <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+        // 2.通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递
+        <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+    </script>
+</body>
+</html>

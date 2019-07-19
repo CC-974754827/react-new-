@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+    <div id="aa"></div>
+    <div id="bb"></div>
+    <div id="cc"></div>
+    <script type="text/babel">
+    // 使用函数定义一个组件
+        // function Hello(props){
+        //     return <h1>Hello,world</h1>
+        // }
+    //使用ES6 class定义一个组件
+        class Message extends React.Component{
+            render(){
+                return <h1>Hello,world</h1>
+            }
+        }
+
+        // const ele = <Hello />;
+        const ele = <Message />;
+
+        ReactDOM.render(
+            ele,
+            document.getElementById('aa')
+        )
+    //传参数
+        function Foo(props){
+            return <h1>hello {props.name}</h1>
+        }
+
+        const name = <Foo name="lili"/>
+
+        ReactDOM.render(
+            name,
+            document.getElementById('bb')
+        );
+
+    //  复合组件
+        function Name(props){
+            return <div>{props.name}</div>
+        }
+        function Url(props){
+            return <div>{props.url}</div>
+        }
+        function App(){
+            return(
+                <div>
+                    <Name name="join" />
+                    <Url url="https://www.baidu.com" />
+                </div>
+            );
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('cc')
+        )
+    </script>
+</body>
+</html>
